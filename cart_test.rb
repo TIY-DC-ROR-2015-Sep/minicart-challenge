@@ -16,19 +16,25 @@ class Item
 end
 
 class Cart
+  #attr_accessor :items
+  #def items
+  #  @items
+  #end
+  #def items= i
+  #  @items = i
+  #end
+
   def initialize
-    @item_count = 0
     @items = []
   end
 
   def add item
-    @item_count += 1
     @items.push item
   end
 
   # attr_reader :item_count
   def item_count
-    @item_count
+    @items.length
   end
 
   def subtotal
