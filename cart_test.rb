@@ -6,9 +6,24 @@ rescue LoadError
 end
 
 class Item
+  attr_reader :name, :price
+
+  def initialize name, price
+    @name  = name
+    @price = price
+  end
 end
 
 class Cart
+  attr_reader :item_count
+
+  def initialize
+    @item_count = 0
+  end
+
+  def add item
+    @item_count += 1
+  end
 end
 
 class CartTest < Minitest::Test
@@ -19,7 +34,6 @@ class CartTest < Minitest::Test
   end
 
   def test_carts_can_hold_items
-    skip
     c = Cart.new
     c.add Item.new("Carrot", 1)
     c.add Item.new("Sweet Potato", 2)
