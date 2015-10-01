@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'pry'
 begin
   require 'minitest/reporters'
   Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
@@ -15,14 +16,27 @@ class Item
 end
 
 class Cart
-  attr_reader :item_count
-
   def initialize
     @item_count = 0
+    @items = []
   end
 
   def add item
     @item_count += 1
+    @items.push item
+  end
+
+  # attr_reader :item_count
+  def item_count
+    @item_count
+  end
+
+  def subtotal
+    t = 0
+    @items.each do |item|
+      t += item.price
+    end
+    t
   end
 end
 
@@ -43,7 +57,6 @@ class CartTest < Minitest::Test
   end
 
   def test_carts_add_up_prices
-    skip
     c = Cart.new
     c.add Item.new("Carrot", 1)
     c.add Item.new("Sweet Potato", 2)
